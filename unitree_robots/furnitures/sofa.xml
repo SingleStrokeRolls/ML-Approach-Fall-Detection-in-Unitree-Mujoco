@@ -1,0 +1,13 @@
+<mujoco model="simple_sofa">
+  <worldbody>
+    <!-- 沙发底座 -->
+    <body name="sofa_base" pos="0 0 0.2">
+      <geom name="seat" type="box" size="0.6 0.6 0.2" rgba="0.4 0.3 0.2 1"/>
+      <!-- 沙发靠背 -->
+      <geom name="backrest" type="box" pos="-0.5 0 0.3" size="0.1 0.6 0.3" rgba="0.4 0.3 0.2 1"/>
+      <!-- 扶手 -->
+      <geom name="armrest_left" type="box" pos="0 -0.5 0.3" size="0.5 0.1 0.3" rgba="0.4 0.3 0.2 1"/>
+      <geom name="armrest_right" type="box" pos="0 0.5 0.3" size="0.5 0.1 0.3" rgba="0.4 0.3 0.2 1"/>
+    </body>
+  </worldbody>
+</mujoco>

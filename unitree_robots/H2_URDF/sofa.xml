@@ -1,0 +1,64 @@
+<body name="sofa_base" pos="0 0 0">
+
+    <!-- Wooden base frame -->
+    <geom name="frame_bottom" type="box" size="1.25 0.60 0.08" pos="0 0 0.08" 
+        material="wood" />
+
+    <!-- Backrest wooden frame -->
+    <geom name="backrest_frame" type="box" size="1.25 0.15 0.55" pos="0 -0.45 0.55" 
+        material="wood" />
+
+    <!-- Left Armrest -->
+    <geom name="arm_left" type="box" size="0.12 0.60 0.35" pos="-1.13 0 0.35" 
+        material="wood" />
+
+    <!-- Right Armrest -->
+    <geom name="arm_right" type="box" size="0.12 0.60 0.35" pos="1.13 0 0.35" 
+        material="wood" />
+
+    <!-- ==================== SEAT CUSHIONS (Depth = 30 cm) ==================== -->
+
+    <body name="seat_mattress" pos="0 0.20 0.18">   <!-- shifted forward to center the 30cm cushion -->
+
+      <!-- Bottom layer - hardest (Layer 1) -->
+      <geom name="pad_layer1" type="box" size="0.92 0.4 0.04" 
+            material="soft_pad" mass="6.0"
+            solref="0.05 1" solimp="0.99 0.99 0.001" />
+
+      <!-- Layer 2 -->
+      <body name="pad_layer2" pos="0 0 0.04">
+        <joint name="layer2_z" type="slide" axis="0 0 1" range="-0.03 0" damping="2800" stiffness="3500"/>
+        <geom name="pad_geom2" type="box" size="0.92 0.4 0.035" 
+              material="soft_pad" mass="4.5"
+              solref="0.03 1.8" solimp="0.97 0.99 0.0005" />
+
+        <!-- Layer 3 -->
+        <body name="pad_layer3" pos="0 0 0.035">
+          <joint name="layer3_z" type="slide" axis="0 0 1" range="-0.035 0" damping="1800" stiffness="1200"/>
+          <geom name="pad_geom3" type="box" size="0.92 0.4 0.03" 
+                material="soft_pad" mass="2.5"
+                solref="0.05 0.5" solimp="0.9 0.95 0.01" />
+
+          <!-- Surface layer - softest (Layer 4) -->
+          <body name="pad_surface" pos="0 0 0.03">
+            <joint name="surface_z" type="slide" axis="0 0 1" range="-0.035 0" damping="1000" stiffness="400"/>
+            <geom name="pad_surface_geom" type="box" size="0.92 0.4 0.025" 
+                  material="soft_pad" mass="1.5"
+                  solref="0.1 0.3" solimp="0.85 0.9 0.02" />
+          </body>
+        </body>
+      </body>
+    </body>
+
+    <!-- ==================== BACK CUSHIONS ==================== -->
+    <body name="back_cushion1" pos="-0.72 -0.32 0.62">
+      <geom name="back1" type="box" size="0.33 0.12 0.38" material="back_pad" />
+    </body>
+    <body name="back_cushion2" pos="0.00 -0.32 0.62">
+      <geom name="back2" type="box" size="0.33 0.12 0.38" material="back_pad" />
+    </body>
+    <body name="back_cushion3" pos="0.72 -0.32 0.62">
+      <geom name="back3" type="box" size="0.33 0.12 0.38" material="back_pad" />
+    </body>
+
+</body>

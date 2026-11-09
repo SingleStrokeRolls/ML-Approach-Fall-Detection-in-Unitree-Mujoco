@@ -1,0 +1,147 @@
+<mujoco model="3_seater_sofa">
+  <compiler angle="radian" />
+
+  <option gravity="0 0 -9.81" timestep="0.002" />
+
+  <!-- Materials -->
+  <asset>
+    <material name="wood"     rgba="0.30 0.20 0.15 1.0" specular="0.3" shininess="0.2"/>
+    <material name="soft_pad" rgba="0.65 0.45 0.35 1.0" specular="0.4" shininess="0.1"/>
+    <material name="back_pad" rgba="0.55 0.38 0.32 1.0" specular="0.3" shininess="0.1"/>
+  </asset>
+
+  <default>
+    <geom friction="0.8 0.1 0.1" solref="0.02 1" solimp="0.95 0.99 0.001"/>
+  </default>
+
+  <worldbody>
+    <!-- Floor for reference -->
+    <geom name="floor" type="plane" size="10 10 0.1" rgba="0.85 0.85 0.85 1" />
+
+    <!-- ==================== SOFA BODY ==================== -->
+    <body name="sofa_base" pos="0 0 0">
+
+      <!-- Wooden base frame -->
+      <geom name="frame_bottom" type="box" size="1.25 0.60 0.08" pos="0 0 0.08" 
+            material="wood" />
+
+      <!-- Backrest wooden frame -->
+      <geom name="backrest_frame" type="box" size="1.25 0.15 0.55" pos="0 -0.45 0.55" 
+            material="wood" />
+
+      <!-- Left Armrest -->
+      <geom name="arm_left" type="box" size="0.12 0.60 0.40" pos="-1.13 0 0.40" 
+            material="wood" />
+
+      <!-- Right Armrest -->
+      <geom name="arm_right" type="box" size="0.12 0.60 0.40" pos="1.13 0 0.40" 
+            material="wood" />
+
+      <!-- ==================== SEAT CUSHIONS (your layered soft pad) ==================== -->
+
+      <!-- Cushion 1 - Left -->
+      <body name="cushion1" pos="-0.72 0.12 0.20">
+        <!-- Bottom layer - hardest -->
+        <geom name="pad_layer1_1" type="box" size="0.70 0.58 0.05" 
+              material="soft_pad" mass="2.0"
+              solref="0.005 2.0" solimp="0.99 0.9999 0.00001" />
+
+        <!-- Layer 2 -->
+        <body name="pad_layer2_1" pos="0 0 0.05">
+          <joint name="layer2_z_1" type="slide" axis="0 0 1" range="-0.04 0" damping="3000" stiffness="4000"/>
+          <geom name="pad_geom2_1" type="box" size="0.70 0.58 0.05" 
+                material="soft_pad" mass="1.5"
+                solref="0.02 2.0" solimp="0.98 0.999 0.0001" />
+
+          <!-- Layer 3 -->
+          <body name="pad_layer3_1" pos="0 0 0.05">
+            <joint name="layer3_z_1" type="slide" axis="0 0 1" range="-0.045 0" damping="2000" stiffness="1500"/>
+            <geom name="pad_geom3_1" type="box" size="0.70 0.58 0.05" 
+                  material="soft_pad" mass="1.0"
+                  solref="0.05 1.5" solimp="0.95 0.995 0.001" />
+
+            <!-- Surface layer - softest -->
+            <body name="pad_surface_1" pos="0 0 0.05">
+              <joint name="surface_z_1" type="slide" axis="0 0 1" range="-0.045 0" damping="1200" stiffness="500"/>
+              <geom name="pad_surface_geom_1" type="box" size="0.70 0.58 0.05" 
+                    material="soft_pad" mass="0.6"
+                    solref="0.1 1.2" solimp="0.9 0.99 0.01" />
+            </body>
+          </body>
+        </body>
+      </body>
+
+      <!-- Cushion 2 - Middle -->
+      <body name="cushion2" pos="0.00 0.12 0.20">
+        <!-- Bottom layer -->
+        <geom name="pad_layer1_2" type="box" size="0.70 0.58 0.05" 
+              material="soft_pad" mass="2.0"
+              solref="0.005 2.0" solimp="0.99 0.9999 0.00001" />
+
+        <body name="pad_layer2_2" pos="0 0 0.05">
+          <joint name="layer2_z_2" type="slide" axis="0 0 1" range="-0.04 0" damping="3000" stiffness="4000"/>
+          <geom name="pad_geom2_2" type="box" size="0.70 0.58 0.05" 
+                material="soft_pad" mass="1.5"
+                solref="0.02 2.0" solimp="0.98 0.999 0.0001" />
+
+          <body name="pad_layer3_2" pos="0 0 0.05">
+            <joint name="layer3_z_2" type="slide" axis="0 0 1" range="-0.045 0" damping="2000" stiffness="1500"/>
+            <geom name="pad_geom3_2" type="box" size="0.70 0.58 0.05" 
+                  material="soft_pad" mass="1.0"
+                  solref="0.05 1.5" solimp="0.95 0.995 0.001" />
+
+            <body name="pad_surface_2" pos="0 0 0.05">
+              <joint name="surface_z_2" type="slide" axis="0 0 1" range="-0.045 0" damping="1200" stiffness="500"/>
+              <geom name="pad_surface_geom_2" type="box" size="0.70 0.58 0.05" 
+                    material="soft_pad" mass="0.6"
+                    solref="0.1 1.2" solimp="0.9 0.99 0.01" />
+            </body>
+          </body>
+        </body>
+      </body>
+
+      <!-- Cushion 3 - Right -->
+      <body name="cushion3" pos="0.72 0.12 0.20">
+        <!-- Bottom layer -->
+        <geom name="pad_layer1_3" type="box" size="0.70 0.58 0.05" 
+              material="soft_pad" mass="2.0"
+              solref="0.005 2.0" solimp="0.99 0.9999 0.00001" />
+
+        <body name="pad_layer2_3" pos="0 0 0.05">
+          <joint name="layer2_z_3" type="slide" axis="0 0 1" range="-0.04 0" damping="3000" stiffness="4000"/>
+          <geom name="pad_geom2_3" type="box" size="0.70 0.58 0.05" 
+                material="soft_pad" mass="1.5"
+                solref="0.02 2.0" solimp="0.98 0.999 0.0001" />
+
+          <body name="pad_layer3_3" pos="0 0 0.05">
+            <joint name="layer3_z_3" type="slide" axis="0 0 1" range="-0.045 0" damping="2000" stiffness="1500"/>
+            <geom name="pad_geom3_3" type="box" size="0.70 0.58 0.05" 
+                  material="soft_pad" mass="1.0"
+                  solref="0.05 1.5" solimp="0.95 0.995 0.001" />
+
+            <body name="pad_surface_3" pos="0 0 0.05">
+              <joint name="surface_z_3" type="slide" axis="0 0 1" range="-0.045 0" damping="1200" stiffness="500"/>
+              <geom name="pad_surface_geom_3" type="box" size="0.70 0.58 0.05" 
+                    material="soft_pad" mass="0.6"
+                    solref="0.1 1.2" solimp="0.9 0.99 0.01" />
+            </body>
+          </body>
+        </body>
+      </body>
+
+      <!-- ==================== BACK CUSHIONS ==================== -->
+      <body name="back_cushion1" pos="-0.72 -0.32 0.65">
+        <geom name="back1" type="box" size="0.33 0.12 0.38" material="back_pad" />
+      </body>
+      <body name="back_cushion2" pos="0.00 -0.32 0.65">
+        <geom name="back2" type="box" size="0.33 0.12 0.38" material="back_pad" />
+      </body>
+      <body name="back_cushion3" pos="0.72 -0.32 0.65">
+        <geom name="back3" type="box" size="0.33 0.12 0.38" material="back_pad" />
+      </body>
+
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true" />
+    </body>
+  </worldbody>
+
+</mujoco>

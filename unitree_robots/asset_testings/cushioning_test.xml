@@ -1,0 +1,71 @@
+<mujoco model="Cushioning Test">
+  <statistic center="1 0.7 1.5" extent="0.8" />
+  <visual>
+    <headlight diffuse="0.9 0.9 0.9" ambient="0.1 0.1 0.1" specular="0.9 0.9 0.9"/>
+    <!--<rgba haze="0.15 0.25 0.35 1" />-->
+    <global azimuth="-140" elevation="-30" />
+  </visual>
+  <asset>
+    <texture type="skybox" builtin="flat" rgb1="0.9 0.9 0.9" rgb2="0.9 0.9 0.9" width="512" height="3072" />
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.5 0.5 0.5"
+      rgb2="0.5 0.5 0.5" markrgb="0.8 0.8 0.8" width="300" height="300" />
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5"
+      reflectance="0.2" />
+    <material name="soft_pad_mat" rgba="0.2 0.6 0.9 0.8" specular="0.1" shininess="0.1"/>
+  </asset>
+  <worldbody>
+    <!-- Ball -->
+    <body name="ball" pos="0 0 1">
+      <freejoint name="ball_joint"/>
+      <geom name="ball_geom" type="sphere" size="0.05" rgba="0.8 0.2 0.2 1" mass="0.5"/>
+      <site name="imu_site" pos="0 0 0" size="0.01"/>
+    </body>
+
+    <!-- Cushion -->
+    <!-- 使用多层结构模拟软垫，每层都有高阻尼，统一2m×2m尺寸 -->
+    <body name="soft_pad_base" pos="0 0 0.05">
+        <!-- 底层 - 最硬 (高度0-0.1m) -->
+        <geom name="pad_layer1" type="box" size="1.0 1.0 0.05" 
+              material="soft_pad_mat" mass="1.0"
+              solref="0.01 1.5" solimp="0.99 0.999 0.0001"/>
+        
+        <!-- 第二层 - 较硬 (高度0.1-0.2m) -->
+        <body name="pad_layer2" pos="0 0 0.1">
+            <joint name="layer2_z" type="slide" axis="0 0 1" 
+                    range="-0.05 0" damping="500" stiffness="5000"/>
+            <geom name="pad_geom2" type="box" size="1.0 1.0 0.05" 
+                  material="soft_pad_mat" mass="0.8"
+                  solref="0.02 1.0" solimp="0.95 0.99 0.001"/>
+            
+            <!-- 第三层 - 中等软度 (高度0.2-0.3m) -->
+            <body name="pad_layer3" pos="0 0 0.1">
+                <joint name="layer3_z" type="slide" axis="0 0 1" 
+                        range="-0.08 0" damping="300" stiffness="3000"/>
+                <geom name="pad_geom3" type="box" size="1.0 1.0 0.05" 
+                      material="soft_pad_mat" mass="0.6"
+                      solref="0.05 0.5" solimp="0.9 0.95 0.01"/>
+                
+                <!-- 表面层 - 最软 (高度0.3-0.38m) -->
+                <body name="pad_surface" pos="0 0 0.1">
+                    <joint name="surface_z" type="slide" axis="0 0 1" 
+                            range="-0.05 0" damping="150" stiffness="1500"/>
+                    <geom name="pad_surface_geom" type="box" size="1.0 1.0 0.04" 
+                          material="soft_pad_mat" mass="0.4"
+                          solref="0.1 0.3" solimp="0.85 0.9 0.02"/>
+                </body>
+            </body>
+        </body>
+    </body>
+    
+
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true" />
+    <geom name="floor" size="0 0 0.05" type="plane" material="groundplane" />
+  </worldbody>
+
+  <sensor>
+    <!-- 加速度计 -->
+    <accelerometer name="ball_accel" site="imu_site"/>
+    <!-- 陀螺仪 -->
+    <!-- <gyro name="ball_gyro" site="imu_site"/> -->
+  </sensor>
+</mujoco>
