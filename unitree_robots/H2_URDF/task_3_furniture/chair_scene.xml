@@ -1,0 +1,58 @@
+<mujoco model="H2 in Sofa Scene">
+  <include file="../shared/H2_modified_high_damping.xml" />
+  <compiler angle="radian" meshdir="../shared/meshes" />
+  <option gravity="0 0 -9.81" timestep="0.002" />
+  <statistic center="1 0.7 1.5" extent="0.8" />
+
+  <visual>
+    <headlight diffuse="0.9 0.9 0.9" ambient="0.1 0.1 0.1" specular="0.9 0.9 0.9"/>
+    <!--<rgba haze="0.15 0.25 0.35 1" />-->
+    <global azimuth="-140" elevation="-30" />
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="flat" rgb1="0.9 0.9 0.9" rgb2="0.9 0.9 0.9" width="512" height="3072" />
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.5 0.5 0.5"
+      rgb2="0.5 0.5 0.5" markrgb="0.8 0.8 0.8" width="300" height="300" />
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5"
+      reflectance="0.2" />
+    <material name="wood_pad" rgba="0.3 0.2 0.15 0.8" specular="0.1" shininess="0.1"/>
+    <material name="wood"     rgba="0.30 0.21 0.15 1.0" specular="0.3" shininess="0.2"/>
+  </asset>
+
+  <default>
+    <!-- <geom friction="0.8 0.1 0.1" solref="0.02 1" solimp="0.95 0.99 0.001"/> -->
+    <!-- <joint damping="20" armature="0.1"  frictionloss="0.2" /> -->
+  </default>
+
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true" />
+    <geom name="floor" size="0 0 0.05" type="plane" material="groundplane" />
+
+    
+
+    <!-- 椅子整体 -->
+    <body name="chair" pos="-2 0.8 0" quat="0 0 0 3.14">
+      <!-- 自由关节：6自由度（3平移 + 3旋转），可被推动、踢翻 -->
+      <freejoint name="chair_free"/>
+      
+      <!-- 惯性：Z降低0.025（高度中心下降） -->
+      <inertial pos="0 0 0.375" mass="15" diaginertia="0.5 0.5 0.5"/>
+      
+      <!-- 座椅面: 离地40cm (0.45→0.40), Z中心0.40 -->
+      <geom name="seat" type="box" size="0.3 0.25 0.025" pos="0 0 0.40" material="wood_pad"/>
+      
+      <!-- 靠背: Z降低0.05，高度中心0.725 -->
+      <geom name="backrest" type="box" size="0.3 0.025 0.325" pos="0 -0.225 0.725" material="wood"/>
+      
+      <!-- 四条腿: 高40cm (0.45→0.40), Z中心0.20 -->
+      <geom name="leg_fl" type="box" size="0.025 0.025 0.20" pos="0.228 0.228 0.20" material="wood"/>
+      <geom name="leg_fr" type="box" size="0.025 0.025 0.20" pos="-0.228 0.228 0.20" material="wood"/>
+      <geom name="leg_bl" type="box" size="0.025 0.025 0.20" pos="0.228 -0.228 0.20" material="wood"/>
+      <geom name="leg_br" type="box" size="0.025 0.025 0.20" pos="-0.228 -0.228 0.20" material="wood"/>
+      
+    </body>
+
+  </worldbody>
+
+</mujoco>

@@ -4,3 +4,8 @@
 **/log/
 **/install/
 simulate/mujoco
+# Generated simulation and notebook artifacts
+**/.ipynb_checkpoints/
+**/MUJOCO_LOG.TXT
+**/MJDATA.TXT
+.venv/

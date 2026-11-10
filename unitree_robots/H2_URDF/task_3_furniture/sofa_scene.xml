@@ -1,0 +1,60 @@
+<mujoco model="H2 in Sofa Scene">
+  <include file="../shared/H2_modified_high_damping.xml" />
+  <compiler angle="radian" meshdir="../shared/meshes" />
+  <option gravity="0 0 -9.81" timestep="0.002" />
+  <statistic center="1 0.7 1.5" extent="0.8" />
+
+  <visual>
+    <headlight diffuse="0.9 0.9 0.9" ambient="0.1 0.1 0.1" specular="0.9 0.9 0.9"/>
+    <!--<rgba haze="0.15 0.25 0.35 1" />-->
+    <global azimuth="-140" elevation="-30" />
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="flat" rgb1="0.9 0.9 0.9" rgb2="0.9 0.9 0.9" width="512" height="3072" />
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.5 0.5 0.5"
+      rgb2="0.5 0.5 0.5" markrgb="0.8 0.8 0.8" width="300" height="300" />
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5"
+      reflectance="0.2" />
+    <material name="soft_pad_mat" rgba="0.2 0.6 0.9 0.8" specular="0.1" shininess="0.1"/>
+    <material name="wood"     rgba="0.30 0.20 0.15 1.0" specular="0.3" shininess="0.2"/>
+    <material name="soft_pad" rgba="0.65 0.45 0.35 1.0" specular="0.4" shininess="0.1"/>
+    <material name="back_pad" rgba="0.55 0.38 0.32 1.0" specular="0.3" shininess="0.1"/>
+  </asset>
+
+  <default>
+    <!-- <geom friction="0.8 0.1 0.1" solref="0.02 1" solimp="0.95 0.99 0.001"/> -->
+    <!-- <joint damping="20" armature="0.1"  frictionloss="0.2" /> -->
+  </default>
+
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true" />
+    <geom name="floor" size="0 0 0.05" type="plane" material="groundplane" />
+
+    <body name="sofa" pos="-2 1.1 0" quat="0 0 0 3.14">
+      <include file="sofa.xml"/>
+    </body>
+
+    <!-- <body name="ball" pos="0 0 1.8">
+      <freejoint name="ball_joint"/>
+      <geom name="ball_geom" type="sphere" size="0.05" rgba="0.8 0.2 0.2 1" mass="1"/>
+      <site name="imu_site" pos="0 0 0" size="0.01"/>
+    </body>
+
+    <body name="ball_out" pos="2 0 1.8">
+      <freejoint name="ball_joint_out"/>
+      <geom name="ball_geom_out" type="sphere" size="0.05" rgba="0.2 0.8 0.2 1" mass="1"/>
+      <site name="imu_site_out" pos="0 0 0" size="0.01"/>
+    </body> -->
+
+    <!-- <body name="H2">
+      <include file="H2_high_damping_include.xml"/>
+    </body> -->
+
+  </worldbody>
+
+  <sensor>
+    <!-- <accelerometer name="imu_acc" site="imu_site" />
+    <accelerometer name="imu_acc_out" site="imu_site_out" /> -->
+  </sensor>
+</mujoco>

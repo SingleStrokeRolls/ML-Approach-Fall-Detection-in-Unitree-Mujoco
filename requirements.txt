@@ -1,0 +1,11 @@
+mujoco
+numpy
+pandas
+matplotlib
+scipy
+tensorflow
+pygame
+jupyterlab
+
+# Standing scripts additionally require Unitree SDK2 Python and its DDS runtime.
+# Install unitree_sdk2py separately from the upstream Unitree repository.
