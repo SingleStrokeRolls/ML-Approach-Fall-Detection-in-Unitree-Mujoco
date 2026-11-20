@@ -8,8 +8,8 @@ import mujoco.viewer
 from threading import Thread
 import threading
 
-from unitree_sdk2py.core.channel import ChannelFactoryInitialize
-from unitree_sdk2py_bridge import UnitreeSdk2Bridge, ElasticBand
+# from unitree_sdk2py.core.channel import ChannelFactoryInitialize
+# from unitree_sdk2py_bridge import UnitreeSdk2Bridge, ElasticBand
 
 import config
 
@@ -112,13 +112,13 @@ def SimulationThread():
     episode = 0
     
 
-    ChannelFactoryInitialize(config.DOMAIN_ID, config.INTERFACE)
-    unitree = UnitreeSdk2Bridge(mj_model, mj_data)
+    # ChannelFactoryInitialize(config.DOMAIN_ID, config.INTERFACE)
+    # unitree = UnitreeSdk2Bridge(mj_model, mj_data)
 
-    if config.USE_JOYSTICK:
-        unitree.SetupJoystick(device_id=0, js_type=config.JOYSTICK_TYPE)
-    if config.PRINT_SCENE_INFORMATION:
-        unitree.PrintSceneInformation()
+    # if config.USE_JOYSTICK:
+    #     unitree.SetupJoystick(device_id=0, js_type=config.JOYSTICK_TYPE)
+    # if config.PRINT_SCENE_INFORMATION:
+    #     unitree.PrintSceneInformation()
 
     while viewer.is_running():
         step_start = time.perf_counter()
@@ -167,7 +167,7 @@ def SimulationThread():
             episode = episode + 1   
             
         
-        if episode >= 10:
+        if episode >= 20:
             print(duration)
             viewer.close()     
 

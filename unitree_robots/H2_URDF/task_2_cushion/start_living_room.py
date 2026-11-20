@@ -19,11 +19,11 @@ FILE_NAME = "0413_leftward_with_arms.csv"
 SCENARIO_LIST = ["BACKWARD", "BACKWARD_TWIST",
                  "FORWARD_FREE_FALL","FORWARD_WITH_ARMS",
                  "LEFTWARD_FREE_FALL","LEFTWARD_WITH_ARMS"]
-SCENARIO = "LEFTWARD_WITH_ARMS"
+SCENARIO = "FORWARD_WITH_ARMS"
 
 # Private Define
 AUTO_END = False
-SAVE = True
+SAVE = False
 WAIT_THRESHOLD = 1 # second
 TimeCounter = 0
 
