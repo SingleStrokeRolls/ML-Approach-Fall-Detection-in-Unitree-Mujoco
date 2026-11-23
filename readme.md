@@ -164,7 +164,7 @@ The [physical experiment video](img/humanoid_air_bag_experiment.mp4) shows a hum
 
 | Demo video | Translation of captions |
 | --- | --- |
-| <video src="img/humanoid_air_bag_experiment.mp4" controls width="420" aria-label="Physical humanoid fall and airbag deployment experiment"></video><br>[Watch or download the video](img/humanoid_air_bag_experiment.mp4) | **Fall onset → airbag deployment:** 662 ms (662 ms since fall onset).<br>**Airbag fully inflated:** 91 ms after deployment (753 ms since fall onset).<br>The moving arrow marks the current stage; the second timing column shows elapsed time since fall onset. |
+| [<img src="img/humanoid_air_bag_experiment.gif" alt="Animated physical humanoid fall and airbag deployment experiment" width="420">](img/humanoid_air_bag_experiment.mp4)<br>[Watch or download the video](img/humanoid_air_bag_experiment.mp4) | **Fall onset → airbag deployment:** 662 ms (662 ms since fall onset).<br>**Airbag fully inflated:** 91 ms after deployment (753 ms since fall onset).<br>The moving arrow marks the current stage; the second timing column shows elapsed time since fall onset. |
 
 ## Discussion
 
