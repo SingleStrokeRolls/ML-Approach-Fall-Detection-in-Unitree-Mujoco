@@ -6,7 +6,7 @@ This research project investigates whether an LSTM can recognize developing huma
 
 **Reported evaluation:** 200 simulated trials, with a mean prediction response time of approximately **252 ms** into the falling sequence. This is elapsed simulation time to a prediction event, not computational inference latency.
 
-[Demonstrations](#simulation-demonstrations) · [Methodology](#methodology) · [Results](#experimental-results) · [Setup](#installation-and-setup) · [Running the project](#running-the-project)
+[Overview](#overview) · [Demonstrations](#simulation-demonstrations) · [Methodology](#methodology) · [Results](#experimental-results) · [Physical Airbag Deployment](#physical-airbag-deployment) · [Discussion](#discussion) · [Task Files](#task-files) · [Repository Structure](#repository-structure) · [Future Work](#future-work-imu-orientation-estimation-with-an-extended-kalman-filter) · [References](#acknowledgments-and-references)
 
 ## Overview
 
